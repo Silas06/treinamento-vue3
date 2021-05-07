@@ -23,7 +23,7 @@
             'border-brand-danger': !!state.name.errorMessage
           }"
           class="block w-full px-4 py-3 mt-1 text-lg bg-gray-100 border-2 border-transparent rounded"
-          placeholder="Jone Doe"
+          placeholder="Silas Teste"
         >
         <span
           v-if="!!state.name.errorMessage"
@@ -42,7 +42,7 @@
             'border-brand-danger': !!state.email.errorMessage
           }"
           class="block w-full px-4 py-3 mt-1 text-lg bg-gray-100 border-2 border-transparent rounded"
-          placeholder="jane.dae@gmail.com"
+          placeholder="silas@gmail.com"
         >
         <span
           v-if="!!state.email.errorMessage"
@@ -61,7 +61,7 @@
             'border-brand-danger': !!state.password.errorMessage
           }"
           class="block w-full px-4 py-3 mt-1 text-lg bg-gray-100 border-2 border-transparent rounded"
-          placeholder="jane.dae@gmail.com"
+          placeholder="321"
         >
         <span
           v-if="!!state.password.errorMessage"

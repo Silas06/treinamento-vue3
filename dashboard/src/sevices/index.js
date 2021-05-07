@@ -12,7 +12,7 @@ const API_ENVS = {
 }
 
 const httpClient = axios.create({
-  baseURL: API_ENVS[process.eventNames.NODE_ENV] ?? API_ENVS.local
+  baseURL: API_ENVS[process.eventNames.NODE_ENV] || API_ENVS.local
 })
 
 httpClient.interceptors.response.use(
