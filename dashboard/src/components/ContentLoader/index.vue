@@ -6,14 +6,14 @@
     }"
     class="opacity-75 content-loader"
   >
-    <span :style="{ animationDuration }" class="content-loader--fx">
-      <slot />
-    </span>
+    <span :style="{ animationDuration }" class="content-loader--fx"/>
+    <slot />
   </div>
 </template>
 
 <script>
 import { computed } from 'vue'
+
 export default {
   props: {
     maxWidth: {
@@ -37,12 +37,12 @@ export default {
       type: String
     }
   },
-
   setup (props) {
     const computedWidth = computed(() => {
       const value = Math.random() * (props.width - props.minWidth)
       return props.width ?? `${Math.floor(value + props.minWidth)}%`
     })
+
     return { computedWidth }
   }
 }
@@ -54,6 +54,7 @@ export default {
     transform: translateX(100%);
   }
 }
+
 .content-loader {
   position: relative;
   vertical-align: middle;
@@ -67,12 +68,7 @@ export default {
   bottom: 0;
   left: 0;
   transform: translateX(-100%);
-  background-image: linear-gradient(
-    to right,
-    #eeeeee 8%,
-    #dddddd 18%,
-    #eeeeee 33%
-  );
+  background-image: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
   background-position: 0 0;
   background-size: 1000 100;
   animation: shimmer infinite alternate ease-in-out;

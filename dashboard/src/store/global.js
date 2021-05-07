@@ -4,8 +4,8 @@ const state = reactive({
   isLoading: false
 })
 
-export default { state }
+export default state
 
-export function setGloballoading (status) {
+export function setGlobalLoading (status) {
   state.isLoading = status
 }

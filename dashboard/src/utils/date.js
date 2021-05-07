@@ -1,7 +1,4 @@
-export function getDiffTimeBetweenCurrentDate (
-  dateString = '',
-  now = new Date()
-) {
+export function getDiffTimeBetweenCurrentDate (dateString = '', now = new Date()) {
   const dayInMilliseconds = 86400000
   if ([null, undefined, false, true].includes(dateString)) {
     return dateString
@@ -35,18 +32,10 @@ export function getDiffTimeBetweenCurrentDate (
     return buildMessage('dia', days)
   }
 
-  if (day < now.getDate() && notZero(day)) {
-    return buildMessage('dia', now.getDate() - day)
-  }
-  if (hour < now.getHours() && notZero(hour)) {
-    return buildMessage('hora', now.getHours() - hour)
-  }
-  if (minutes < now.getMinutes() && notZero(minutes)) {
-    return buildMessage('minuto', now.getMinutes() - minutes)
-  }
-  if (seconds < now.getSeconds() && notZero(seconds)) {
-    return buildMessage('segundo', now.getSeconds() - seconds)
-  }
+  if (day < now.getDate() && notZero(day)) { return buildMessage('dia', now.getDate() - day) }
+  if (hour < now.getHours() && notZero(hour)) { return buildMessage('hora', now.getHours() - hour) }
+  if (minutes < now.getMinutes() && notZero(minutes)) { return buildMessage('minuto', now.getMinutes() - minutes) }
+  if (seconds < now.getSeconds() && notZero(seconds)) { return buildMessage('segundo', now.getSeconds() - seconds) }
 
   return buildMessage('segundo', 1)
 }

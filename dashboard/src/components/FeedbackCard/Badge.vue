@@ -1,7 +1,7 @@
 <template>
   <span
-  :class="`bg-${classColor}`"
-  class="p-2 text-xs font-black text-white uppercase rounded-full">
+    :class="`bg-${classColor}`"
+    class="p-2 text-xs font-black text-white uppercase rounded-full">
     {{ label }}
   </span>
 </template>
@@ -12,7 +12,6 @@ export default {
   props: {
     type: { type: String, required: true }
   },
-
   setup (props) {
     const label = computed(() => {
       if (props.type === 'ISSUE') {
@@ -38,9 +37,10 @@ export default {
       return 'brand-graydark'
     })
 
-    return { label, classColor }
+    return {
+      label,
+      classColor
+    }
   }
 }
 </script>
-
-<style></style>

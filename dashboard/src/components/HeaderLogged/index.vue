@@ -1,26 +1,26 @@
 <template>
-  <div class="flex items-center justify-between w-/5 max-w-6xl py-10">
+  <div class="flex items-center justify-between w-4/5 max-w-6xl py-10">
     <div class="w-28 lg:w-36">
-      <img class="w-full" src="@/assets/images/logo_white.png" alt="logo" />
+      <img class="w-full" src="../../assets/images/logo_white.png" alt="logo">
     </div>
 
     <div class="flex">
       <ul class="flex list-none">
         <li
-          @click.prevent="() => router.push({ name: 'Credencials' })"
-          class="px-6 py-2 mr-2 font-bold text-white rounded-full cursor-pointer focus:outline-none "
+          @click="() => router.push({ name: 'Credencials' })"
+          class="px-6 py-2 mr-2 font-bold text-white rounded-full cursor-pointer focus:outline-none"
         >
-          Credencials
+          Credenciais
         </li>
         <li
-          @click.prevent="() => router.push({ name: 'Feedbacks' })"
-          class="px-6 py-2 mr-2 font-bold text-white rounded-full cursor-pointer focus:outline-none "
+          @click="() => router.push({ name: 'Feedbacks' })"
+          class="px-6 py-2 mr-2 font-bold text-white rounded-full cursor-pointer focus:outline-none"
         >
           Feedbacks
         </li>
         <li
-        id="logout-button"
-          @click.prevent="handleLogout"
+          id="logout-button"
+          @click="handleLogout"
           class="px-6 py-2 font-bold bg-white rounded-full cursor-pointer text-brand-main focus:outline-none"
         >
           {{ logoutLabel }}
@@ -31,15 +31,15 @@
 </template>
 
 <script>
-import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { computed } from 'vue'
 import useStore from '../../hooks/useStore'
-import { clearCurrentUser } from '../../store/user'
+import { cleanCurrentUser } from '../../store/user'
 
 export default {
   setup () {
     const router = useRouter()
-    const store = useStore('user')
+    const store = useStore('User')
 
     const logoutLabel = computed(() => {
       if (!store.currentUser.name) {
@@ -50,7 +50,7 @@ export default {
 
     function handleLogout () {
       window.localStorage.removeItem('token')
-      clearCurrentUser()
+      cleanCurrentUser()
       router.push({ name: 'Home' })
     }
 
@@ -62,5 +62,3 @@ export default {
   }
 }
 </script>
-
-<style></style>

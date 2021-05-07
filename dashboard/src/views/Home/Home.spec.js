@@ -1,6 +1,6 @@
 import Home from '.'
-import { routes } from '../../router'
 import { shallowMount } from '@vue/test-utils'
+import { routes } from '../../router'
 
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -10,7 +10,7 @@ const router = createRouter({
 })
 
 describe('<Home />', () => {
-  it('Abrir pagina Home correta', async () => {
+  it('should render home correctly', async () => {
     router.push('/')
     await router.isReady()
     const wrapper = shallowMount(Home, {

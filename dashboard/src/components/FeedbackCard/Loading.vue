@@ -10,12 +10,14 @@
       height="90px"
       animation-duration="2s"
     />
+
     <content-loader
       class="mt-3 rounded"
       width="90%"
       height="90px"
       animation-duration="2.3s"
     />
+
     <content-loader
       class="mt-3 rounded"
       width="90%"
@@ -27,9 +29,8 @@
 
 <script>
 import ContentLoader from '../ContentLoader'
+
 export default {
   components: { ContentLoader }
 }
 </script>
-
-<style></style>

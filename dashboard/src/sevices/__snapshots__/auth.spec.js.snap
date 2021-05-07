@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`teste auth deve retornar um token quando fizer login 1`] = `
+Object {
+  "data": Object {
+    "token": "123.123.122",
+  },
+  "errors": null,
+}
+`;
+
+exports[`teste auth retorna o usuario que esta registrado 1`] = `
+Object {
+  "data": Object {
+    "email": "igor@igor.me",
+    "name": "Igor",
+    "password": "123",
+  },
+  "errors": null,
+}
+`;

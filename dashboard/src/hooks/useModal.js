@@ -16,7 +16,7 @@ export default function useModal () {
   }
 
   function off (fn) {
-    bus.on(EVENT_NAME, fn)
+    bus.off(EVENT_NAME, fn)
   }
 
   return { open, close, listen, off }

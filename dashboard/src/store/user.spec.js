@@ -1,28 +1,34 @@
 import useStore from '../hooks/useStore'
-import { setCurrentUser, resetUserStore, setApiKey, clearCurrentUser } from './user'
+import {
+  resetUserStore,
+  setApiKey,
+  cleanCurrentUser,
+  setCurrentUser
+} from './user'
 
 describe('UserStore', () => {
   afterEach(() => {
     resetUserStore()
   })
-  it('setar usuario atual', () => {
+
+  it('should set current user', () => {
     const store = useStore()
     setCurrentUser({ name: 'Igor' })
-    expect(store.user.currentUser.name).toBe('Igor')
+    expect(store.User.currentUser.name).toBe('Igor')
   })
 
-  it('Mostrar a apikey do usuário atual', () => {
+  it('should set api_key on current user', () => {
     const store = useStore()
     setApiKey('123')
-    expect(store.user.currentUser.apiKey).toBe('123')
+    expect(store.User.currentUser.apiKey).toBe('123')
   })
 
-  it('limpar usuário aatual', () => {
+  it('should clean current user', () => {
     const store = useStore()
     setCurrentUser({ name: 'Igor' })
-    expect(store.user.currentUser.name).toBe('Igor')
-    clearCurrentUser()
+    expect(store.User.currentUser.name).toBe('Igor')
+    cleanCurrentUser()
 
-    expect(store.user.currentUser.name).toBeFalsy()
+    expect(store.User.currentUser.name).toBeFalsy()
   })
 })

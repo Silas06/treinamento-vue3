@@ -1,29 +1,30 @@
-import { validadeEmptyAndLength3, validadeEmptyAndEmail } from './validators'
+import {
+  validateEmptyAndEmail,
+  validateEmptyAndLength3
+} from './validators'
 
-describe('oque estou testando? Validator Utils', () => {
-  it('Meu primeiro teste, (campo valido)', () => {
-    expect(validadeEmptyAndLength3('3214')).toBe(true)
+describe('Validators utils', () => {
+  it('should give an error with empty payload', () => {
+    expect(validateEmptyAndLength3()).toBe('*Este campo é obrigatório')
   })
 
-  it('teste aceite 2 caracteres', () => {
-    expect(validadeEmptyAndLength3('1')).toBe(
-      '*Este campo precisa de no minimo 3 caracteres'
-    )
+  it('should give an error with less then 3 character payload', () => {
+    expect(validateEmptyAndLength3('12')).toBe('*Este campo precisa de no mínimo 3 caracteres')
   })
 
-  it('campo vazio teste', () => {
-    expect(validadeEmptyAndLength3()).toBe('*Este campo é obrigatório')
+  it('should returns true when pass a correct param', () => {
+    expect(validateEmptyAndLength3('1234')).toBe(true)
   })
 
-  it('campo email vazio', () => {
-    expect(validadeEmptyAndEmail()).toBe('*Este campo é obrigatório')
+  it('should give an error with empty payload', () => {
+    expect(validateEmptyAndEmail()).toBe('*Este campo é obrigatório')
   })
 
-  it('teste se email é válido', () => {
-    expect(validadeEmptyAndEmail('silas@')).toBe('*Digite um email válido')
+  it('should give an error with a invalid param', () => {
+    expect(validateEmptyAndEmail('myemail@')).toBe('*Este campo precisa ser um e-mail')
   })
 
-  it('teste email valido', () => {
-    expect(validadeEmptyAndEmail('silas@gmail.com')).toBe(true)
+  it('should returns true when pass a correct param', () => {
+    expect(validateEmptyAndEmail('igor@igor.me')).toBe(true)
   })
 })

@@ -3,8 +3,10 @@
     <header-logged />
   </div>
 
-  <div class="flex flex-col justify-center items-center h-64 bg-brand-gray">
-    <h1 class="text-4xl font-black text-center text-gray-800">Feedbacks</h1>
+  <div class="flex flex-col items-center justify-center h-64 bg-brand-gray">
+    <h1 class="text-4xl font-black text-center text-gray-800">
+      Feedbacks
+    </h1>
     <p class="text-lg text-center text-gray-800 font-regular">
       Detalhes de todos os feedbacks recebidos.
     </p>
@@ -13,7 +15,9 @@
   <div class="flex justify-center w-full pb-20">
     <div class="w-4/5 max-w-6xl py-10 grid grid-cols-4 gap-2">
       <div>
-        <h1 class="text-3xl font-black text-brand-darkgray">Listagem</h1>
+        <h1 class="text-3xl font-black text-brand-darkgray">
+          Listagem
+        </h1>
         <suspense>
           <template #default>
             <filters
@@ -21,27 +25,25 @@
               class="mt-8 animate__animated animate__fadeIn animate__faster"
             />
           </template>
-
           <template #fallback>
             <filters-loading class="mt-8" />
           </template>
         </suspense>
-      </div>
 
-      <div class="col-span-3 px-10 pt-20">
-        <p v-if="state.hasError" class="text-lg text-center text-gray-800">
-          Aconteceu um erro ao carregar os feedbacks
+      </div>
+      <div class="px-10 pt-20 col-span-3">
+        <p
+          v-if="state.hasError"
+          class="text-lg text-center text-gray-800 font-regular">
+          Aconteceu um erro ao carregar os feedbacks 🥺
         </p>
         <p
-          v-if="!state.feedbacks.length && !state.isLoading"
-          class="text-lg text-center text-gray-800"
-        >
-          Ainda nenhum feedback recebido
+          v-if="!state.feedbacks.length && !state.isLoading && !state.isLoadingFeedbacks && !state.hasError"
+          class="text-lg text-center text-gray-800 font-regular">
+          Ainda nenhum feedback recebido 🤓
         </p>
 
-        <feedback-card-loading
-          v-if="state.isLoading || state.isLoadingFeddbacks"
-        />
+        <feedback-card-loading v-if="state.isLoading || state.isLoadingFeedbacks" />
         <feedback-card
           v-else
           v-for="(feedback, index) in state.feedbacks"
@@ -50,74 +52,45 @@
           :feedback="feedback"
           class="mb-8"
         />
-
-        <feedback-card-loading
-          v-if="state.isLoadingMoreFeedback"
-        />
+        <feedback-card-loading v-if="state.isLoadingMoreFeedbacks" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import HeaderLogged from '@/components/HeaderLogged'
+import { reactive, onMounted, onUnmounted, onErrorCaptured } from 'vue'
 import Filters from './Filters'
 import FiltersLoading from './FiltersLoading'
-import FeedbackCardLoading from '@/components/FeedbackCard/Loading.vue'
-import FeedbackCard from '@/components/FeedbackCard'
-import { onErrorCaptured, onMounted, onUnmounted, reactive } from 'vue'
-import services from '../../sevices'
+import HeaderLogged from '../../components/HeaderLogged'
+import FeedbackCard from '../../components/FeedbackCard'
+import FeedbackCardLoading from '../../components/FeedbackCard/Loading'
+import services from '../../services'
+
 export default {
   components: {
     HeaderLogged,
     Filters,
     FiltersLoading,
-    FeedbackCardLoading,
-    FeedbackCard
+    FeedbackCard,
+    FeedbackCardLoading
   },
-
   setup () {
     const state = reactive({
       isLoading: false,
-      isLoadingFeddbacks: false,
-      isLoadingMoreFeedback: false,
-      hasError: false,
+      isLoadingFeedbacks: false,
+      isLoadingMoreFeedbacks: false,
       feedbacks: [],
+      currentFeedbackType: '',
       pagination: {
         limit: 5,
-        offset: 0
+        offset: 0,
+        total: 0
       },
-      currentFeedbackType: ''
+      hasError: false
     })
 
     onErrorCaptured(handleErrors)
-
-    async function changeFeedbacksType (type) {
-      try {
-        state.isLoadingFeddbacks = true
-        state.pagination.limit = 5
-        state.pagination.offset = 0
-        state.currentFeedbackType = type
-
-        const { data } = await services.feedbacks.getAll({
-          type,
-          ...state.pagination
-        })
-
-        state.feedbacks = data.results
-        state.pagination = data.pagination
-        state.isLoadingFeddbacks = false
-      } catch (error) {
-        handleErrors(error)
-      }
-    }
-
-    function handleErrors (error) {
-      state.isLoading = false
-      state.isLoadingFeddbacks = false
-      state.isLoadingMoreFeedback = false
-      state.hasError = !!error
-    }
 
     onMounted(() => {
       fetchFeedbacks()
@@ -128,17 +101,24 @@ export default {
       window.removeEventListener('scroll', handleScroll, false)
     })
 
-    async function handleScroll () {
-      const isBottomOfWindow =
-        Math.ceil(document.documentElement.scrollTop + window.innerHeight) >=
-        document.documentElement.scrollHeight
+    function handleErrors (error) {
+      state.isLoading = false
+      state.isLoadingFeedbacks = false
+      state.isLoadingMoreFeedback = false
+      state.hasError = !!error
+    }
 
-      if (state.isLoading || state.isLoadingMoreFeedback) return
+    async function handleScroll () {
+      const isBottomOfWindow = Math.ceil(
+        document.documentElement.scrollTop + window.innerHeight
+      ) >= document.documentElement.scrollHeight
+
+      if (state.isLoading || state.isLoadingMoreFeedbacks) return
       if (!isBottomOfWindow) return
       if (state.feedbacks.length >= state.pagination.total) return
 
       try {
-        state.isLoadingMoreFeedback = true
+        state.isLoadingMoreFeedbacks = true
         const { data } = await services.feedbacks.getAll({
           ...state.pagination,
           type: state.currentFeedbackType,
@@ -149,8 +129,28 @@ export default {
           state.feedbacks.push(...data.results)
         }
 
-        state.isLoadingMoreFeedback = false
+        state.isLoadingMoreFeedbacks = false
         state.pagination = data.pagination
+      } catch (error) {
+        state.isLoadingMoreFeedbacks = false
+        handleErrors(error)
+      }
+    }
+
+    async function changeFeedbacksType (type) {
+      try {
+        state.isLoadingFeedbacks = true
+        state.pagination.offset = 0
+        state.pagination.limit = 5
+        state.currentFeedbackType = type
+        const { data } = await services.feedbacks.getAll({
+          type,
+          ...state.pagination
+        })
+
+        state.feedbacks = data.results
+        state.pagination = data.pagination
+        state.isLoadingFeedbacks = false
       } catch (error) {
         handleErrors(error)
       }
@@ -163,7 +163,7 @@ export default {
           ...state.pagination,
           type: state.currentFeedbackType
         })
-        console.log(data)
+
         state.feedbacks = data.results
         state.pagination = data.pagination
         state.isLoading = false
@@ -179,5 +179,3 @@ export default {
   }
 }
 </script>
-
-<style></style>
