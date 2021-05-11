@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import Playground from './views/Playground/index.vue'
+import PlayGround from './views/PlayGround/index.vue'
 import App from './App.vue'
 import { setup } from './utils/bootstrap'
 
@@ -12,6 +12,6 @@ setup({
     createApp(App).mount('#app')
   },
   onDevelopment: () => {
-    createApp(Playground).mount('#app')
+    createApp(PlayGround).mount('#app')
   }
 })

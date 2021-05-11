@@ -1,20 +1,20 @@
 import { reactive, readonly } from 'vue'
 
 export type StoreState = {
-  currentComponent: string;
-  feedbackType: string;
-  message: string;
-  apiKey: string;
-  fingerprint: string;
-  currentPage: string;
+  currentComponent: string
+  feedbackType: string
+  message: string
+  apikey: string
+  fingerprint: string
+  currentPage: string
 }
 
 const initialState: StoreState = {
   currentComponent: 'SelectFeedbackType',
-  message: '',
   feedbackType: '',
+  message: '',
   fingerprint: '',
-  apiKey: '',
+  apikey: '',
   currentPage: ''
 }
 
@@ -28,29 +28,29 @@ export function setMessage (message: string): void {
   state.message = message
 }
 
-export function setFeedbackType (type: string): void {
+export function setFeefbackType (type: string): void {
   state.feedbackType = type
 }
 
-export function setCurrentPage (page: string): void {
+export function setCurrentPage (page: strting): void {
   state.currentPage = page
 }
 
-export function setApiKey (apiKey: string): void {
-  state.apiKey = apiKey
+export function setApikey (apikey: string): void {
+  state.apikey = apikey
 }
 
-export function setFingerprint (fingerprint: string): void {
+export function serFingerprint (fingerprint: string): void {
   state.fingerprint = fingerprint
 }
 
 export function resetStore (): void {
   setCurrentComponent(initialState.currentComponent)
   setMessage(initialState.message)
-  setFeedbackType(initialState.feedbackType)
+  setApikey(initialState.apikey)
+  setFeefbackType(initialState.feedbackType)
+  serFingerprint(initialState.fingerprint)
   setCurrentPage(initialState.currentPage)
-  setApiKey(initialState.apiKey)
-  setFingerprint(initialState.fingerprint)
 }
 
 export default readonly(state)
