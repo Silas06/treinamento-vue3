@@ -1,47 +1,42 @@
 <template>
   <component
     :is="store.currentComponent"
-    @select-feedback-type="handleSelectFedbackType"
+    @select-feedback-type="handleSelectFeedbackType"
     @next="next"
   />
 </template>
 
 <script lang="ts">
-import { setFeedbackType, StoreState } from '../../store'
-import useStore from '../../hooks/store'
 import { defineComponent } from 'vue'
-import useNavigation, { Navigation } from '../../hooks/navigation'
 import SelectFeedbackType from './SelectFeedbackType.vue'
+import WriteAFeedback from './WriteAFeedback.vue'
 import Success from './Success.vue'
 import ErrorState from './Error.vue'
-import WriteAFeedback from './WriteAFeedback.vue'
+import useStore from '../../hooks/store'
+import useNavigation, { Navigation } from '../../hooks/navigation'
+import { StoreState, setFeedbackType } from '../../store'
 
 interface SetupReturn {
-  store: StoreState
-  handleSelectFedbackType(type: string): void
-  next: Navigation['next']
+  store: StoreState;
+  next: Navigation['next'];
+  handleSelectFeedbackType(type: string): void;
 }
+
 export default defineComponent({
-  components: {
-    SelectFeedbackType,
-    Success,
-    WriteAFeedback,
-    Error: ErrorState
-  },
+  components: { SelectFeedbackType, WriteAFeedback, Success, Error: ErrorState },
   setup (): SetupReturn {
     const store = useStore()
     const { next } = useNavigation()
-    function handleSelectFedbackType (type: string): void {
+
+    function handleSelectFeedbackType (type: string): void {
       setFeedbackType(type)
     }
 
     return {
       store,
-      handleSelectFedbackType,
-      next
+      next,
+      handleSelectFeedbackType
     }
   }
 })
 </script>
-
-<style></style>

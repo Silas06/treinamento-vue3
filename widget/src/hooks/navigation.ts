@@ -1,11 +1,14 @@
 import useStore from './store'
-import { setCurrentComponent, setFeedbackType } from '../store'
+import {
+  setCurrentComponent,
+  setFeedbackType
+} from '../store'
 
 export interface Navigation {
-  next(): void
-  back(): void
-  setErrorState(): void
-  setSuccessState(): void
+  next(): void;
+  back(): void;
+  setErrorState(): void;
+  setSuccessState(): void;
 }
 
 export default function useNavigation (): Navigation {

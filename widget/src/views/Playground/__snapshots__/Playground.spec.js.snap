@@ -4,7 +4,7 @@ exports[`<Playground /> should component render correctly 1`] = `
 VueWrapper {
   "__app": Object {
     "_component": Object {
-      "__emits": null,
+      "__emits": Object {},
       "__props": Array [
         Object {},
         Array [],
@@ -22,12 +22,12 @@ VueWrapper {
         <h1
           class="text-6xl font-black text-brand-gray"
         >
-          PlayGround
+          Playground
         </h1>
         <p
           class="text-2xl mt-3 font-regular text-brand-gray"
         >
-           Este é o playground, use paara testar o widget 
+          Este é o playground, use para testar o widget.
         </p>
       </div>
       <div
@@ -36,13 +36,8 @@ VueWrapper {
         <h1
           class="text-6xl font-black text-brand-graydark"
         >
-          PlayGround
+          🚀
         </h1>
-        <p
-          class="text-2xl mt-3 font-regular text-brand-gray"
-        >
-           Este é o playground, use paara testar o widget 
-        </p>
       </div>
       <div
         class="w-full h-3/4 flex flex-col justify-center items-center bg-brand-main"
@@ -50,13 +45,8 @@ VueWrapper {
         <h1
           class="text-6xl font-black text-brand-gray"
         >
-          PlayGround
+          👀
         </h1>
-        <p
-          class="text-2xl mt-3 font-regular text-brand-gray"
-        >
-           Este é o playground, use paara testar o widget 
-        </p>
       </div>
       <div
         class="w-full h-3/4 flex flex-col justify-center items-center bg-brand-gray"
@@ -64,13 +54,8 @@ VueWrapper {
         <h1
           class="text-6xl font-black text-brand-graydark"
         >
-          PlayGround
+          🚨
         </h1>
-        <p
-          class="text-2xl mt-3 font-regular text-brand-gray"
-        >
-           Este é o playground, use paara testar o widget 
-        </p>
       </div>
       <widget-stub />
       
@@ -127,13 +112,10 @@ VueWrapper {
     "provide": [Function],
     "unmount": [Function],
     "use": [Function],
-    "version": "3.0.11",
+    "version": "3.0.5",
   },
   "__setProps": [Function],
-  "componentVM": Object {
-    "hasOwnProperty": [Function],
-  },
+  "componentVM": Object {},
   "rootVM": Object {},
-  "wrapperElement": ,
 }
 `;

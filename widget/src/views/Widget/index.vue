@@ -1,12 +1,11 @@
 <template>
   <teleport to="body">
     <component
-      @openBox="handleOpenBox()"
-      @closeBox="handleCloseBox()"
+      @open-box="handleOpenBox"
+      @close-box="handleCloseBox"
       :is="state.component"
     />
   </teleport>
-  {{ state.component }}
 </template>
 
 <script lang="ts">
@@ -14,21 +13,20 @@ import { defineComponent, reactive, watch } from 'vue'
 import Standby from './Standby.vue'
 import Box from './Box.vue'
 import useIframeControl from '../../hooks/iframe'
-import useStore from '@/hooks/store'
+import useStore from '../../hooks/store'
 
 type State = {
-  component: string
+  component: string;
 }
 
 interface SetupReturn {
-  state: State
-  handleCloseBox(): void
-  handleOpenBox(): void
+  state: State;
+  handleOpenBox(): void;
+  handleCloseBox(): void;
 }
 
 export default defineComponent({
   components: { Standby, Box },
-
   setup (): SetupReturn {
     const store = useStore()
     const iframe = useIframeControl()
@@ -37,21 +35,23 @@ export default defineComponent({
     })
 
     watch(() => store.currentComponent, () => {
-      iframe.updateCoreValueOnStore()
+      iframe.updateCoreValuesOnStore()
     })
 
     function handleOpenBox (): void {
       iframe.notifyOpen()
       state.component = 'Box'
     }
+
     function handleCloseBox (): void {
       iframe.notifyClose()
       state.component = 'Standby'
     }
+
     return {
       state,
-      handleCloseBox,
-      handleOpenBox
+      handleOpenBox,
+      handleCloseBox
     }
   }
 })

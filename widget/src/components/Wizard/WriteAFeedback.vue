@@ -1,57 +1,55 @@
 <template>
-  <div class="flex flex-col items-center justify-center w-full my-5">
+  <div class="felx flex-col items-center justify-center w-full my-5">
     <textarea
       v-model="state.feedback"
-      class="w-full rounded-lg border-2 border-gray-300 border-solid h-24 p-2 resize-none focus:outline-none"
-    ></textarea>
-
+      class="w-full rounded-lg border-2 border-gray-300 border-solid h-24 p-2 resize-none focus:outline-none">
+    </textarea>
     <button
-      :disable="submitButtonIsDisabled"
+      :disabled="submitButtonIsDisabled"
       :class="{
         'opacity-50': state.isLoading,
         'opacity-50 bg-gray-100 text-gray-500': submitButtonIsDisabled,
         'bg-brand-main text-white': !submitButtonIsDisabled
       }"
-      @click.prevent="submitAFeedback"
-      class="rounded-lg font-black mt-3 flex flex-col justify-center items-center py-2 w-full cursor-pointer focus:outline-none transition-all duration-200 "
-    >
-      <icon
-        v-if="state.isLoading"
-        name="loading"
-        class="animate-spin color-white "
-      />
-      <template v-else>Enviar feedback</template>
+      @click="submitAFeedback"
+      class="
+        rounded-lg font-black mt-3 flex flex-col
+        justify-center items-center py-2 w-full cursor-pointer
+        focus:outline-none transition-all duration-200
+      ">
+      <icon v-if="state.isLoading" name="loading" class="animate-spin" color="white" />
+      <template v-else>
+        Enviar feedback
+      </template>
     </button>
   </div>
 </template>
 
 <script lang="ts">
+import { ComputedRef, computed, defineComponent, reactive } from 'vue'
+import useNavigation from '../../hooks/navigation'
+import { setMessage } from '../../store'
 import Icon from '../Icon/index.vue'
-import useStore from '@/hooks/store'
-import { computed, ComputedRef, defineComponent, reactive } from 'vue'
-import useNavigation from '@/hooks/navigation'
-import { setMessage } from '@/store'
-import services from '@/services'
+import useStore from '../../hooks/store'
+import services from '../../services'
 
 type State = {
-  feedback: string
-  isLoading: boolean
-  hasError: Error | null
+  feedback: string;
+  isLoading: boolean;
+  hasError: Error | null;
 }
 
 interface SetupReturn {
-  state: State
-  submitAFeedback(): Promise<void>
-  submitButtonIsDisabled: ComputedRef<boolean>
+  state: State;
+  submitAFeedback(): Promise<void>;
+  submitButtonIsDisabled: ComputedRef<boolean>;
 }
 
 export default defineComponent({
-  components: {
-    Icon
-  },
+  components: { Icon },
   setup (): SetupReturn {
     const store = useStore()
-    const { setErrorState, setSuccessState } = useNavigation()
+    const { setSuccessState, setErrorState } = useNavigation()
     const state = reactive<State>({
       feedback: '',
       isLoading: false,
@@ -69,18 +67,18 @@ export default defineComponent({
     }
 
     async function submitAFeedback (): Promise<void> {
+      setMessage(state.feedback)
+      state.isLoading = true
+
       try {
-        setMessage(state.feedback)
-        state.isLoading = true
         const response = await services.feedbacks.create({
           type: store.feedbackType,
           text: store.message,
           page: store.currentPage,
-          apiKey: store.apikey,
+          apiKey: store.apiKey,
           device: window.navigator.userAgent,
           fingerprint: store.fingerprint
         })
-        console.log(store.apikey + 'silas')
 
         if (!response.errors) {
           setSuccessState()
@@ -96,11 +94,9 @@ export default defineComponent({
 
     return {
       state,
-      submitButtonIsDisabled,
-      submitAFeedback
+      submitAFeedback,
+      submitButtonIsDisabled
     }
   }
 })
 </script>
-
-<style></style>

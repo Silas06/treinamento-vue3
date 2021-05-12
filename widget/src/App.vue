@@ -7,8 +7,6 @@ import { defineComponent } from 'vue'
 import Widget from './views/Widget/index.vue'
 
 export default defineComponent({
-  components: Widget
+  components: { Widget }
 })
 </script>
-
-<style></style>

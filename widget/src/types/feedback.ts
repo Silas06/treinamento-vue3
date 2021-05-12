@@ -1,9 +1,9 @@
 export type Feedback = {
-    type: string;
-    text: string;
-    fingerprint: string;
-    apiKey: string;
-    device: string;
-    page: string;
-    createdAt: string;
+  type: string;
+  text: string;
+  fingerprint: string;
+  device: string;
+  page: string;
+  apiKey: string;
+  createdAt: string;
 }
