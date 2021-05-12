@@ -25,6 +25,7 @@
       </p>
 
       <button
+        id="button-close-widget"
         @click.prevent="() => emit('close-box')"
         class="text-xl text-gray-800 focus:outline-none"
       >
@@ -47,21 +48,21 @@
 
 <script lang="ts">
 import { computed, ComputedRef, defineComponent, SetupContext } from 'vue'
-import { brand } from '../../../palette'
-import colors from 'tailwindcss/colors'
+import { brand } from '../../../palette.js'
+import colors from 'tailwindcss/colors.js'
 import useStore from '../../hooks/store'
 import Icon from '@/components/Icon/index.vue'
 import Wizard from '@/components/Wizard/index.vue'
 import useNavigation, { Navigation } from '../../hooks/navigation'
 
 interface SetupReturn {
-  emit: SetupContext['emit'];
-  back: Navigation['back'];
-  canGoBack: ComputedRef<boolean>;
-  label: ComputedRef<string>;
-  canShowAdditionalControlAndInfo: ComputedRef<boolean>;
-  brandColors: Record<string, string>;
-  colors: Record<string, string>;
+  emit: SetupContext['emit']
+  back: Navigation['back']
+  canGoBack: ComputedRef<boolean>
+  label: ComputedRef<string>
+  canShowAdditionalControlAndInfo: ComputedRef<boolean>
+  brandColors: Record<string, string>
+  colors: Record<string, string>
 }
 
 export default defineComponent({

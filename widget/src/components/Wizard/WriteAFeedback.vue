@@ -26,13 +26,12 @@
 </template>
 
 <script lang="ts">
-import Icon from '../Icon'
+import Icon from '../Icon/index.vue'
 import useStore from '@/hooks/store'
 import { computed, ComputedRef, defineComponent, reactive } from 'vue'
 import useNavigation from '@/hooks/navigation'
 import { setMessage } from '@/store'
-// import services from '@/services'
-const services = {}
+import services from '@/services'
 
 type State = {
   feedback: string
@@ -77,12 +76,13 @@ export default defineComponent({
           type: store.feedbackType,
           text: store.message,
           page: store.currentPage,
-          apikey: store.apikey,
+          apiKey: store.apikey,
           device: window.navigator.userAgent,
           fingerprint: store.fingerprint
         })
+        console.log(store.apikey + 'silas')
 
-        if (!response.error) {
+        if (!response.errors) {
           setSuccessState()
         } else {
           setErrorState()
