@@ -4,9 +4,12 @@ function init (apiKey) {
     const fp = await window.FingerprintJS.load()
     const fingerprint = await fp.get()
 
-    const WIDGET_URL = `https://igorhalfeld-feedbacker-widget.netlify.app?api_key=${apiKey}&page=${page}&fingerprint=${fingerprint.visitorId}`
+    const WIDGET_URL = `https://silas06-feedbecker-widget.netlify.app?api_key=${apiKey}&page=${page}&fingerprint=${fingerprint.visitorId}`
     const config = { method: 'HEAD' }
-    const res = await fetch(`https://backend-treinamento-vue3.vercel.app/apikey/exists?apikey=${apiKey}`, config)
+    const res = await fetch(
+      `https://backend-treinamento-vue3.vercel.app/apikey/exists?apikey=${apiKey}`,
+      config
+    )
 
     if (res.status === 200) {
       const iframe = document.createElement('iframe')
@@ -20,7 +23,7 @@ function init (apiKey) {
       iframe.style.zIndex = '99999'
       document.body.appendChild(iframe)
 
-      window.addEventListener('message', (event) => {
+      window.addEventListener('message', event => {
         if (!event.data.isWidget) return
 
         if (event.data.isOpen) {
@@ -38,7 +41,8 @@ function init (apiKey) {
   }
 
   const script = document.createElement('script')
-  script.src = '//cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js'
+  script.src =
+    '//cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js'
   script.async = 'async'
   script.addEventListener('load', handleLoadWidget)
 
