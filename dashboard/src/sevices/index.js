@@ -6,13 +6,13 @@ import { setGloballoading } from '../store/global'
 import feedbacksServices from './feedbaacks'
 
 const API_ENVS = {
-  production: 'https://backend-t.vercel.app',
+  production: 'https://backend-treinamento-vue3-pi.vercel.app',
   development: '',
   local: 'http://localhost:3000'
 }
 
 const httpClient = axios.create({
-  baseURL: API_ENVS[process.eventNames.NODE_ENV] || API_ENVS.local
+  baseURL: API_ENVS[process.NODE_ENV] || API_ENVS.local
 })
 
 httpClient.interceptors.response.use(
