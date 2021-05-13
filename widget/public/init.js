@@ -4,7 +4,7 @@ function init (apiKey) {
     // const fp = await window.FingerprintJS.load()
     // const fingerprint = await fp.get()
 
-    const WIDGET_URL = `https://silas06-feedbecker-widget.netlify.app?api_key=${apiKey}&page=${page}&fingerprint=3232323232`
+    const WIDGET_URL = `https://silas06-feedbacker-widget.netlify.app?api_key=${apiKey}&page=${page}&fingerprint=3232323232`
     const config = { method: 'HEAD' }
     const res = await fetch(
       `https://backend-treinamento-vue3.vercel.app/apikey/exists?apikey=${apiKey}`,
