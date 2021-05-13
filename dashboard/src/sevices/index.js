@@ -6,7 +6,7 @@ import { setGloballoading } from '../store/global'
 import feedbacksServices from './feedbaacks'
 
 const API_ENVS = {
-  production: 'https://backend-treinamento-vue3-pi.vercel.app',
+  production: 'https://backend-t.vercel.app',
   development: '',
   local: 'http://localhost:3000'
 }
