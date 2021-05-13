@@ -29,8 +29,8 @@ function init (apiKey) {
         if (!event.data.isWidget) return
 
         if (event.data.isOpen) {
-          iframe.width = '100%'
-          iframe.height = '100%'
+          iframe.width = '400px'
+          iframe.height = 'auto'
         } else {
           iframe.width = '300px'
           iframe.height = '150px'
