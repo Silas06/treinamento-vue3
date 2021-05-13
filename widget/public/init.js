@@ -7,7 +7,7 @@ function init (apiKey) {
     const WIDGET_URL = `https://silas06-feedbacker-widget.netlify.app?api_key=${apiKey}&page=${page}&fingerprint=3232323232`
     const config = { method: 'HEAD' }
     const res = await fetch(
-      `https://backend-treinamento-vue3.vercel.app/apikey/exists?apikey=${apiKey}`,
+      `https://backend-treinamento-vue3-pi.vercel.app/apikey/exists?apikey=${apiKey}`,
       config
     )
 
