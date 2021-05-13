@@ -1,15 +1,17 @@
 function init (apiKey) {
   async function handleLoadWidget () {
     const page = `${window.location.origin}${window.location.pathname}`
-    const fp = await window.FingerprintJS.load()
-    const fingerprint = await fp.get()
+    // const fp = await window.FingerprintJS.load()
+    // const fingerprint = await fp.get()
 
-    const WIDGET_URL = `https://silas06-feedbecker-widget.netlify.app?api_key=${apiKey}&page=${page}&fingerprint=${fingerprint.visitorId}`
+    const WIDGET_URL = `https://silas06-feedbecker-widget.netlify.app?api_key=${apiKey}&page=${page}&fingerprint=3232323232`
     const config = { method: 'HEAD' }
     const res = await fetch(
       `https://backend-treinamento-vue3.vercel.app/apikey/exists?apikey=${apiKey}`,
       config
     )
+
+    console.log(WIDGET_URL)
 
     if (res.status === 200) {
       const iframe = document.createElement('iframe')
