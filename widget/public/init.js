@@ -44,7 +44,7 @@ function init (apiKey) {
 
   const script = document.createElement('script')
   script.src =
-    '//cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js'
+    'https://jsonplaceholder.typicode.com/users'
   script.async = 'async'
   script.addEventListener('load', handleLoadWidget)
 
