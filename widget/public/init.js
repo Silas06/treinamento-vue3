@@ -39,7 +39,7 @@ function init (apiKey) {
       return
     }
 
-    console.log('* [feedbacker] was not loaded because apikey does not exists')
+    console.log('* [feedbacker] nao foi possivrl varregar o widget porque a chave API nao existe.')
   }
 
   const script = document.createElement('script')
